@@ -12,7 +12,10 @@ namespace Okazuki.Interactivity
 {
     public abstract class TriggerBase : DependencyObject, IBehavior
     {
-        private ActionCollection actions = new ActionCollection();
+        public static readonly DependencyProperty ActionsImplProperty =
+            DependencyProperty.Register("ActionsImpl", typeof(ActionCollection), typeof(TriggerBase), new PropertyMetadata(null));
+
+
 
         internal TriggerBase(Type associatedType)
         {
@@ -102,13 +105,20 @@ namespace Okazuki.Interactivity
         /// public ActionCollection Actions { get { return tshi.ActionImpl; } }
         /// </code>
         /// </summary>
-        protected ActionCollection ActionsImpl
+        public ActionCollection ActionsImpl
         {
-            get 
+            get
             {
-                return this.actions;
+                var actions = (ActionCollection)GetValue(ActionsImplProperty);
+                if (actions == null)
+                {
+                    actions = new ActionCollection();
+                    this.SetValue(ActionsImplProperty, actions);
+                }
+                return actions;
             }
         }
+
 
         protected IEnumerable<object> InvokeActions(object parameter)
         {

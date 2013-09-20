@@ -48,9 +48,13 @@
 				<Behaviors:MessageDialogBehavior Message="テスト"/>
 			</Interactivity:Interaction.Behaviors>
 		</Button>
-		<Button Content="Button" HorizontalAlignment="Left" Margin="120,176,0,0" Grid.Row="1" VerticalAlignment="Top">
+		<Button Content="ClickEventTriggerBehvior and MainPageViewModelMessageDialogAction sample button" HorizontalAlignment="Left" Margin="120,176,0,0" Grid.Row="1" VerticalAlignment="Top">
 			<Interactivity:Interaction.Behaviors>
-				<Behaviors:ClickEventTriggerBehavior/>
+				<Behaviors:ClickEventTriggerBehavior>
+					<Behaviors:ClickEventTriggerBehavior.Actions>
+						<Behaviors:MainPageViewModelMessageDialogAction TargetObject="{Binding}"/>
+					</Behaviors:ClickEventTriggerBehavior.Actions>
+				</Behaviors:ClickEventTriggerBehavior>
 			</Interactivity:Interaction.Behaviors>
 		</Button>
 		<TextBox HorizontalAlignment="Left" Margin="123,142,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding InputMessage, Mode=TwoWay}" VerticalAlignment="Top" Width="465"/>
